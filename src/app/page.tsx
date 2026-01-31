@@ -10,7 +10,7 @@ import { Connectors } from "@/components/Connectors";
 export default function Home() {
   const [copied, setCopied] = useState(false);
 
-  const installCommand = "curl -fsSL https://raw.githubusercontent.com/zorgspace/slashbot/master/scripts/install.sh | bash";
+  const installCommand = "curl -fsSL https://slashbot.dev/install.sh | bash";
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(installCommand);
