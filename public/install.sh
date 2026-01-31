@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # Slashbot installer
-# Usage: curl -fsSL https://slashbot.dev/install.sh | bash
+# Usage: curl -fsSL https://getslashbot.com/install.sh | bash
 
 REPO_OWNER="zorgspace"
 REPO_NAME="slashbot"

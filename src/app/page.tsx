@@ -22,7 +22,7 @@ export default function Home() {
       .catch(() => {});
   }, []);
 
-  const installCommand = "curl -fsSL https://slashbot.dev/install.sh | bash";
+  const installCommand = "curl -fsSL https://getslashbot.com/install.sh | bash";
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(installCommand);
