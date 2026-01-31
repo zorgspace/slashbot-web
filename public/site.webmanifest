@@ -1,0 +1,9 @@
+{
+  "name": "Slashbot",
+  "short_name": "Slashbot",
+  "description": "AI-Powered CLI Assistant",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#0a0a0f",
+  "theme_color": "#a855f7"
+}
