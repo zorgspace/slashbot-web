@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useVersion } from "@/hooks/useVersion";
 
 interface TerminalLine {
   type: "prompt" | "command" | "output" | "error" | "success" | "violet" | "muted" | "logo";
@@ -16,9 +17,9 @@ const skullLogo = ` ▄▄▄▄▄▄▄
 ▐░░▀▀▀░░▌
  ▀▀▀▀▀▀▀`;
 
-const demoLines: TerminalLine[] = [
+const getDemoLines = (version: string): TerminalLine[] => [
   { type: "logo", content: skullLogo, delay: 200 },
-  { type: "violet", content: "Slashbot v1.0.5", delay: 100 },
+  { type: "violet", content: `Slashbot ${version || ""}`.trim(), delay: 100 },
   { type: "muted", content: "Grok 4.1 · X.AI · ~/projects", delay: 50 },
   { type: "muted", content: "─".repeat(40), delay: 100 },
   { type: "output", content: "", delay: 200 },
@@ -56,9 +57,16 @@ const demoLines: TerminalLine[] = [
 ];
 
 export function Terminal() {
+  const version = useVersion();
   const [lines, setLines] = useState<TerminalLine[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const terminalRef = useRef<HTMLDivElement>(null);
+  const demoLines = useMemo(() => getDemoLines(version), [version]);
+
+  useEffect(() => {
+    setLines([]);
+    setCurrentIndex(0);
+  }, [version]);
 
   useEffect(() => {
     if (currentIndex < demoLines.length) {
@@ -82,7 +90,7 @@ export function Terminal() {
       }, 6000);
       return () => clearTimeout(resetTimer);
     }
-  }, [currentIndex]);
+  }, [currentIndex, demoLines]);
 
   const getLineClass = (type: string) => {
     switch (type) {

@@ -2,9 +2,11 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useVersion } from "@/hooks/useVersion";
 
 export function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const version = useVersion();
 
   const navItems = [
     { href: "#features", label: "Features" },
@@ -22,9 +24,11 @@ export function Navigation() {
             <span className="text-terminal-text font-semibold text-lg">
               slashbot
             </span>
-            <span className="text-terminal-muted text-sm hidden sm:inline">
-              v1.0.5
-            </span>
+            {version && (
+              <span className="text-terminal-muted text-sm hidden sm:inline">
+                {version}
+              </span>
+            )}
           </Link>
 
           {/* Desktop Navigation */}
