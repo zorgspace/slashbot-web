@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Navigation } from "@/components/Navigation";
 import { Terminal } from "@/components/Terminal";
@@ -9,6 +9,18 @@ import { Connectors } from "@/components/Connectors";
 
 export default function Home() {
   const [copied, setCopied] = useState(false);
+  const [version, setVersion] = useState("v1.0.5");
+
+  useEffect(() => {
+    fetch("https://api.github.com/repos/zorgspace/slashbot/releases/latest")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.tag_name) {
+          setVersion(data.tag_name);
+        }
+      })
+      .catch(() => {});
+  }, []);
 
   const installCommand = "curl -fsSL https://slashbot.dev/install.sh | bash";
 
@@ -398,7 +410,7 @@ export default function Home() {
             <div className="flex items-center gap-2">
               <span className="text-terminal-violet text-xl font-bold">/</span>
               <span className="text-terminal-text font-semibold">slashbot</span>
-              <span className="text-terminal-muted text-sm">v1.0.5</span>
+              <span className="text-terminal-muted text-sm">{version}</span>
             </div>
             <div className="flex flex-wrap items-center justify-center gap-6 text-terminal-muted text-sm">
               <a
