@@ -37,3 +37,9 @@ next-env.d.ts
 
 # Bun
 bun.lockb
+
+# Releases
+slashbot-web-release.tar.gz
+
+# Slashbot
+.slashbot

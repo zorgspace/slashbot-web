@@ -42,3 +42,9 @@ connect telegram bot with token 1111
 Compress the roadmap in index and make sure nothing is duplicated, it is too long
 launch dev
 no, remove this component and update the one in index
+add and commit all
+push
+remove heavy files from git commit
+include them in the gitignore
+add .slashbot too
+push
