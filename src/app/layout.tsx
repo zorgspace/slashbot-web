@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     template: "%s | Slashbot",
   },
   description:
-    "AI-powered CLI assistant with Grok 4.1. Autonomous code operations, git integration, task scheduling, and connectors for Telegram & Discord.",
+    "AI-powered CLI assistant with Grok 4.1. Features autonomous code operations, git integration, task scheduling, voice capabilities via OpenAI, tokenization with Bankr, social networking on Moltbook, and connectors for Telegram & Discord.",
   keywords: [
     "slashbot",
     "CLI",
