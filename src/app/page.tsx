@@ -8,10 +8,13 @@ import { FeatureCard } from "@/components/FeatureCard";
 import { Connectors } from "@/components/Connectors";
 import { motion } from "framer-motion";
 import { useVersion } from "@/hooks/useVersion";
+import { useReleases } from "@/hooks/useReleases";
+import ReactMarkdown from 'react-markdown';
 
 export default function Home() {
   const [copied, setCopied] = useState(false);
   const version = useVersion();
+  const releases = useReleases();
 
   const installCommand = "curl -fsSL https://getslashbot.com/install.sh | bash";
 
@@ -112,7 +115,7 @@ export default function Home() {
           >
             {/* Skull Logo */}
             <pre className="text-terminal-violet text-2xl md:text-3xl font-mono mb-6 glow-violet inline-block">
-{` ▄▄▄▄▄▄▄
+              {` ▄▄▄▄▄▄▄
 ▐░░░░░░░▌
 ▐░▀░░░▀░▌
 ▐░░░▄░░░▌
@@ -216,7 +219,9 @@ export default function Home() {
             {features.map((feature, index) => (
               <FeatureCard
                 key={feature.title}
-                icon={<span className="text-terminal-violet">{feature.icon}</span>}
+                icon={
+                  <span className="text-terminal-violet">{feature.icon}</span>
+                }
                 title={feature.title}
                 description={feature.description}
                 command={feature.command}
@@ -240,7 +245,8 @@ export default function Home() {
               <span className="text-terminal-violet">●</span> Roadmap
             </h2>
             <p className="text-terminal-muted max-w-2xl mx-auto">
-              Future plans and milestones for Slashbot, including the upcoming Solana token launch.
+              Future plans and milestones for Slashbot, including the upcoming
+              Solana token launch.
             </p>
           </motion.div>
           <div className="max-w-4xl mx-auto">
@@ -259,39 +265,39 @@ export default function Home() {
                 </span>
               </div>
               <div className="p-6 bg-terminal-bg text-terminal-text space-y-4">
+                {releases.length > 0 ? (
+                  releases.map((release, index) => (
+                    <div key={release.tag_name}>
+                      <h3 className="text-terminal-violet font-bold mb-2">
+                        {release.name} ({release.tag_name}) - {new Date(release.published_at).toLocaleDateString()}
+                      </h3>
+                      <div className="text-terminal-muted prose prose-invert max-w-none">
+                        <ReactMarkdown>{release.body}</ReactMarkdown>
+                      </div>
+                      {index < releases.length - 1 && <hr className="border-terminal-border my-4" />}
+                    </div>
+                  ))
+                ) : (
+                  <div className="text-terminal-muted">
+                    Loading releases...
+                  </div>
+                )}
                 <div>
-                  <h3 className="text-terminal-violet font-bold mb-2">Version {version} - Current Release</h3>
+                  <h3 className="text-terminal-violet font-bold mb-2">
+                    Upcoming Features
+                  </h3>
                   <ul className="list-disc list-inside space-y-1 text-terminal-muted">
-                    <li>Basic web interface for interacting with Slashbot CLI assistant.</li>
-                    <li>Integration with Grok API for AI-driven commands and actions.</li>
-                    <li>Responsive design using Tailwind CSS and Framer Motion.</li>
-                    <li><strong>Inherited Capabilities from CLI Version v1.0.5</strong></li>
-                    <li>Lightweight CLI assistant powered by Grok API from X.AI with vision support.</li>
-                    <li>AI-powered agent with autonomous execution, agentic loop, and context-aware continuations.</li>
-                    <li>Code operations: grep, read, edit, create files with security checks and glob patterns.</li>
-                    <li>Task scheduling with cron jobs and automated commands.</li>
-                    <li>Git integration: status, diff, log, add, commit, checkout, stash.</li>
-                    <li>Skills system for installing and loading custom extensions from URLs.</li>
-                    <li>Vision support for processing images through grok-vision-beta model.</li>
-                    <li>Voice transcription from Telegram and Discord using OpenAI Whisper.</li>
-                    <li>Web search and fetch capabilities.</li>
-                    <li>Connectors for Telegram and Discord bots.</li>
-                    <li>Custom Skills: openai-voice (voice capabilities), telegram.</li>
-                    <li>Commands: /login, /logout, /config, /init, /grep, /files, /read, /write, /task, /skill, /usage, /context, /history, /clear, /help, and natural language queries.</li>
-                    <li>Tech Stack: Bun runtime, TypeScript with strict mode, ESLint, Prettier, Biome for linting and formatting.</li>
-                    <li>APIs and Integrations: X.AI Grok API (with vision), GitHub API for updates, Telegram, Discord, WhatsApp for notifications.</li>
-                    <li>Architecture: Modular design with REPL loop, agentic loop for multi-step actions, security checks for destructive operations.</li>
-                    <li>Additional Features: Notifications, file system interactions, version control, web fetching, and more.</li>
+                    <li>
+                      Integrated wallet to pay with $SLASHBOT token
+                      (AtiFyHm6UMNLXCWJGLqhxSwvr3n3MgFKxppkKWUoBAGS) - bypass
+                      Grok API key requirement.
+                    </li>
+                    <li>
+                      Enhanced user interface with advanced animations and
+                      transitions.
+                    </li>
                   </ul>
                 </div>
-                <div>
-                  <h3 className="text-terminal-violet font-bold mb-2">Upcoming Features</h3>
-                  <ul className="list-disc list-inside space-y-1 text-terminal-muted">
-                    <li>Integrated wallet to pay with $SLASHBOT token (AtiFyHm6UMNLXCWJGLqhxSwvr3n3MgFKxppkKWUoBAGS) - bypass Grok API key requirement.</li>
-                    <li>Enhanced user interface with advanced animations and transitions.</li>
-                  </ul>
-                </div>
-
               </div>
             </motion.div>
           </div>
@@ -316,7 +322,6 @@ export default function Home() {
           </motion.div>
 
           <Connectors />
-
         </div>
       </section>
 
@@ -347,9 +352,7 @@ export default function Home() {
               <div className="terminal-dot bg-terminal-red"></div>
               <div className="terminal-dot bg-terminal-yellow"></div>
               <div className="terminal-dot bg-terminal-green"></div>
-              <span className="ml-4 text-terminal-muted text-sm">
-                /help
-              </span>
+              <span className="ml-4 text-terminal-muted text-sm">/help</span>
             </div>
             <div className="p-6 bg-terminal-bg">
               <div className="grid sm:grid-cols-2 gap-1">
@@ -433,31 +436,42 @@ export default function Home() {
               </div>
               <div className="p-4 bg-terminal-bg font-mono text-sm space-y-4">
                 <div>
-                  <div className="text-terminal-muted text-xs mb-1">Required: X.AI API Key</div>
+                  <div className="text-terminal-muted text-xs mb-1">
+                    Required: X.AI API Key
+                  </div>
                   <div className="text-terminal-text">
                     <span className="text-terminal-violet">slashbot &gt; </span>
-                    <span className="text-terminal-violet">/login</span> xai-xxxxxxxxxxxx
+                    <span className="text-terminal-violet">/login</span>{" "}
+                    xai-xxxxxxxxxxxx
                   </div>
                 </div>
                 <div>
-                  <div className="text-terminal-muted text-xs mb-1">Optional: Voice transcription</div>
+                  <div className="text-terminal-muted text-xs mb-1">
+                    Optional: Voice transcription
+                  </div>
                   <div className="text-terminal-text">
                     <span className="text-terminal-violet">slashbot &gt; </span>
-                    Set up OpenAI for voice transcription with key sk-xxxxxxxxxxxx
+                    Set up OpenAI for voice transcription with key
+                    sk-xxxxxxxxxxxx
                   </div>
                 </div>
                 <div>
-                  <div className="text-terminal-muted text-xs mb-1">Optional: Telegram</div>
+                  <div className="text-terminal-muted text-xs mb-1">
+                    Optional: Telegram
+                  </div>
                   <div className="text-terminal-text">
                     <span className="text-terminal-violet">slashbot &gt; </span>
                     Connect Telegram bot with token 123456:ABC-xyz
                   </div>
                 </div>
                 <div>
-                  <div className="text-terminal-muted text-xs mb-1">Optional: Discord</div>
+                  <div className="text-terminal-muted text-xs mb-1">
+                    Optional: Discord
+                  </div>
                   <div className="text-terminal-text">
                     <span className="text-terminal-violet">slashbot &gt; </span>
-                    Set up Discord bot with token MTIxMjM0... on channel 1234567890
+                    Set up Discord bot with token MTIxMjM0... on channel
+                    1234567890
                   </div>
                 </div>
               </div>
@@ -473,8 +487,12 @@ export default function Home() {
             <div className="flex items-center gap-2">
               <span className="text-terminal-violet text-xl font-bold">/</span>
               <span className="text-terminal-text font-semibold">slashbot</span>
-              {version && <span className="text-terminal-muted text-sm">{version}</span>}
-              <span className="text-terminal-muted text-xs">Made with Slashbot</span>
+              {version && (
+                <span className="text-terminal-muted text-sm">{version}</span>
+              )}
+              <span className="text-terminal-muted text-xs">
+                Made with Slashbot
+              </span>
             </div>
             <div className="flex flex-wrap items-center justify-center gap-6 text-terminal-muted text-sm">
               <a
@@ -513,7 +531,10 @@ export default function Home() {
           </div>
           <div className="mt-6 text-center">
             <div className="text-terminal-muted text-xs font-mono mb-2">
-              Solana: <span className="text-terminal-violet">AtiFyHm6UMNLXCWJGLqhxSwvr3n3MgFKxppkKWUoBAGS</span>
+              Solana:{" "}
+              <span className="text-terminal-violet">
+                AtiFyHm6UMNLXCWJGLqhxSwvr3n3MgFKxppkKWUoBAGS
+              </span>
             </div>
             <div className="text-terminal-muted text-xs font-mono">
               Built with Bun, TypeScript & Grok API

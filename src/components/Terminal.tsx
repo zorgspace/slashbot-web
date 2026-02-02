@@ -10,18 +10,16 @@ interface TerminalLine {
   delay?: number;
 }
 
-const skullLogo = ` ▄▄▄▄▄▄▄
-▐░░░░░░░▌
-▐░▀░░░▀░▌
-▐░░░▄░░░▌
+const getBanner = (version: string) => ` ▄▄▄▄▄▄▄   Slashbot ${version}
+▐░░░░░░░▌  Grok 4.1 · X.AI · ~/
+▐░▀░░░▀░▌  Context: GROK.md
+▐░░░▄░░░▌  ? help · Tab complete
 ▐░░▀▀▀░░▌
- ▀▀▀▀▀▀▀`;
+ ▀▀▀▀▀▀▀ `;
 
 const getDemoLines = (version: string): TerminalLine[] => [
-  { type: "logo", content: skullLogo, delay: 200 },
-  { type: "violet", content: `Slashbot ${version || ""}`.trim(), delay: 100 },
-  { type: "muted", content: "Grok 4.1 · X.AI · ~/projects", delay: 50 },
-  { type: "muted", content: "─".repeat(40), delay: 100 },
+  { type: "logo", content: getBanner(version), delay: 200 },
+  { type: "muted", content: "────────────────────────────────────────────────────────────", delay: 100 },
   { type: "output", content: "", delay: 200 },
   { type: "prompt", content: "slashbot > " },
   { type: "command", content: "/help", delay: 600 },
