@@ -17,6 +17,7 @@ import {
   parseUsageFromResponse,
   TokenCountResult,
   TokenUsage,
+  Message,
 } from '@/lib/tokens';
 import { verifyBalance, deductCredits, isValidWalletAddress } from '@/lib/balance';
 import {
@@ -47,7 +48,7 @@ const DEFAULT_MODEL = 'grok-4-1-fast-reasoning';
 
 interface ChatRequest {
   model?: string;
-  messages: Array<{ role: string; content: string | unknown }>;
+  messages: Message[];
   stream?: boolean;
   max_tokens?: number;
   temperature?: number;
@@ -113,9 +114,7 @@ export async function POST(request: NextRequest) {
     const model = normalizeModel(body.model);
 
     // Count input tokens with detailed breakdown
-    const inputTokenBreakdown = countMessageTokens(
-      messages as Array<{ role: string; content: string | unknown }>
-    );
+    const inputTokenBreakdown = countMessageTokens(messages);
     const inputTokens = inputTokenBreakdown.total;
 
     // Estimate cost for balance check

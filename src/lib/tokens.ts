@@ -141,9 +141,9 @@ interface ImagePart {
   };
 }
 
-type ContentPart = TextPart | ImagePart | { type: string; [key: string]: unknown };
+export type ContentPart = TextPart | ImagePart | { type: string; [key: string]: unknown };
 
-interface Message {
+export interface Message {
   role: string;
   content: string | ContentPart[];
   name?: string;
