@@ -80,6 +80,20 @@ export default function Home() {
         "Search the web and fetch URLs with [[search]] and [[fetch]] actions.",
       command: "[[fetch url='...'/]]",
     },
+    {
+      icon: "●",
+      title: "Heartbeat System",
+      description:
+        "Periodic AI reflection with scheduled wake-ups, HEARTBEAT.md checklists, and alert routing.",
+      command: "/heartbeat",
+    },
+    {
+      icon: "●",
+      title: "Solana Wallet",
+      description:
+        "Integrated wallet for SOL & $SLASHBOT tokens. Pay for API usage, send tokens, redeem credits.",
+      command: "/wallet",
+    },
   ];
 
   const commands = [
@@ -98,6 +112,8 @@ export default function Home() {
     { cmd: "/history [n]", desc: "Show command history" },
     { cmd: "/clear", desc: "Clear conversation" },
     { cmd: "/help", desc: "Show all commands" },
+    { cmd: "/heartbeat [status]", desc: "Periodic AI reflection system" },
+    { cmd: "/wallet [balance]", desc: "Solana wallet management" },
   ];
 
   return (
@@ -288,13 +304,11 @@ export default function Home() {
                   </h3>
                   <ul className="list-disc list-inside space-y-1 text-terminal-muted">
                     <li>
-                      Integrated wallet to pay with $SLASHBOT token
-                      (AtiFyHm6UMNLXCWJGLqhxSwvr3n3MgFKxppkKWUoBAGS) - bypass
-                      Grok API key requirement.
-                    </li>
-                    <li>
                       Enhanced user interface with advanced animations and
                       transitions.
+                    </li>
+                    <li>
+                      Multi-model support with additional AI providers.
                     </li>
                   </ul>
                 </div>
