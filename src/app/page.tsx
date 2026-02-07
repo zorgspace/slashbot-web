@@ -8,13 +8,13 @@ import { FeatureCard } from "@/components/FeatureCard";
 import { Connectors } from "@/components/Connectors";
 import { motion } from "framer-motion";
 import { useVersion } from "@/hooks/useVersion";
-import { useReleases } from "@/hooks/useReleases";
-import ReactMarkdown from 'react-markdown';
+import ReactMarkdown from "react-markdown";
+import { Roadmap } from "@/components/Roadmap";
+import { TokenUtility } from "@/components/TokenUtility";
 
 export default function Home() {
   const [copied, setCopied] = useState(false);
   const version = useVersion();
-  const releases = useReleases();
 
   const installCommand = "curl -fsSL https://getslashbot.com/install.sh | bash";
 
@@ -93,6 +93,13 @@ export default function Home() {
       description:
         "Integrated wallet for SOL & $SLASHBOT tokens. Pay for API usage, send tokens, redeem credits.",
       command: "/wallet",
+    },
+    {
+      icon: "●",
+      title: "Developer Experience",
+      description:
+        "Enhanced productivity with hooks and triggers for automated workflows and integrations.",
+      command: "hooks & triggers",
     },
   ];
 
@@ -280,38 +287,8 @@ export default function Home() {
                   ROADMAP.md
                 </span>
               </div>
-              <div className="p-6 bg-terminal-bg text-terminal-text space-y-4">
-                {releases.length > 0 ? (
-                  releases.map((release, index) => (
-                    <div key={release.tag_name}>
-                      <h3 className="text-terminal-violet font-bold mb-2">
-                        {release.name} ({release.tag_name}) - {new Date(release.published_at).toLocaleDateString()}
-                      </h3>
-                      <div className="text-terminal-muted prose prose-invert max-w-none">
-                        <ReactMarkdown>{release.body}</ReactMarkdown>
-                      </div>
-                      {index < releases.length - 1 && <hr className="border-terminal-border my-4" />}
-                    </div>
-                  ))
-                ) : (
-                  <div className="text-terminal-muted">
-                    Loading releases...
-                  </div>
-                )}
-                <div>
-                  <h3 className="text-terminal-violet font-bold mb-2">
-                    Upcoming Features
-                  </h3>
-                  <ul className="list-disc list-inside space-y-1 text-terminal-muted">
-                    <li>
-                      Enhanced user interface with advanced animations and
-                      transitions.
-                    </li>
-                    <li>
-                      Multi-model support with additional AI providers.
-                    </li>
-                  </ul>
-                </div>
+              <div className="p-6 bg-terminal-bg text-terminal-text">
+                <Roadmap />
               </div>
             </motion.div>
           </div>
@@ -336,6 +313,45 @@ export default function Home() {
           </motion.div>
 
           <Connectors />
+        </div>
+      </section>
+
+      {/* Token Utility Section */}
+      <section id="token-utility" className="py-20 px-4 violet-gradient">
+        <div className="max-w-7xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-3xl font-bold text-terminal-text mb-4">
+              <span className="text-terminal-violet">●</span> Token Utility
+            </h2>
+            <p className="text-terminal-muted max-w-2xl mx-auto">
+              Learn about the $SLASHBOT token and how it powers the ecosystem.
+            </p>
+          </motion.div>
+          <div className="max-w-4xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="terminal-window"
+            >
+              <div className="terminal-header">
+                <div className="terminal-dot bg-terminal-red"></div>
+                <div className="terminal-dot bg-terminal-yellow"></div>
+                <div className="terminal-dot bg-terminal-green"></div>
+                <span className="ml-4 text-terminal-muted text-sm">
+                  TOKEN_UTILITY.md
+                </span>
+              </div>
+              <div className="p-6 bg-terminal-bg text-terminal-text">
+                <TokenUtility />
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
 

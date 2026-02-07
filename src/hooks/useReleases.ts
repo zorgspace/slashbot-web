@@ -7,6 +7,12 @@ interface Release {
   name: string;
   body: string;
   published_at: string;
+  zipball_url: string;
+  tarball_url: string;
+  assets: Array<{
+    name: string;
+    browser_download_url: string;
+  }>;
 }
 
 let cachedReleases: Release[] | null = null;
