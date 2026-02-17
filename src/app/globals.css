@@ -2,25 +2,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-
 
 :root {
-  --terminal-bg: #0a0a0f;
-  --terminal-surface: #12121a;
-  --terminal-border: #2a2a3a;
+  --terminal-bg: #1e1e2e;
+  --terminal-surface: #282a40;
+  --terminal-border: #353550;
   --terminal-text: #e0e0e8;
   --terminal-muted: #8888a0;
   --terminal-violet: #8A2BE2;
   --terminal-violet-light: #b388ff;
   --terminal-violet-dark: #5c2d91;
-  --terminal-green: #2e7d32;
-  --terminal-red: #c62828;
-  --terminal-yellow: #f9a825;
-  --terminal-cyan: #00acc1;
+  --terminal-green: #4ade80;
+  --terminal-red: #f87171;
+  --terminal-yellow: #fbbf24;
+  --terminal-cyan: #22d3ee;
+  --terminal-orange: #e8a030;
 }
 
 * {
@@ -75,6 +71,7 @@ body {
   .text-terminal-red { color: var(--terminal-red); }
   .text-terminal-yellow { color: var(--terminal-yellow); }
   .text-terminal-cyan { color: var(--terminal-cyan); }
+  .text-terminal-orange { color: var(--terminal-orange); }
 
   .bg-terminal-bg { background-color: var(--terminal-bg); }
   .bg-terminal-surface { background-color: var(--terminal-surface); }
@@ -127,10 +124,10 @@ body {
   .cursor {
     display: inline-block;
     width: 0.5rem;
-    height: 1.25rem;
-    background-color: var(--terminal-violet);
+    height: 1.125rem;
+    background-color: var(--terminal-text);
     animation: blink 1s step-end infinite;
-    margin-left: 0.25rem;
+    vertical-align: middle;
   }
 
   @keyframes blink {
@@ -214,7 +211,7 @@ body {
   }
 
   .violet-gradient {
-    background: linear-gradient(135deg, rgba(138, 43, 226, 0.08) 0%, rgba(92, 45, 145, 0.03) 100%);
+    background: linear-gradient(135deg, rgba(138, 43, 226, 0.06) 0%, rgba(92, 45, 145, 0.02) 100%);
   }
 
   .violet-glow {

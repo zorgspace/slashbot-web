@@ -26,101 +26,107 @@ export default function Home() {
   const features = [
     {
       icon: "●",
-      title: "AI-Powered Agent",
+      title: "Multi-Provider AI Agent",
       description:
-        "Autonomous execution with Grok API. Agentic loop with context-aware continuations.",
-      command: "slashbot",
+        "21 LLM providers including xAI, OpenAI, Anthropic, Google, Mistral, Ollama and more. Full agentic loop with tool calling.",
+      command: "/providers select",
     },
     {
       icon: "●",
-      title: "Code Operations",
+      title: "Shell & Filesystem",
       description:
-        "Grep, read, edit, create files with security checks. Supports glob patterns.",
-      command: "[[grep]], [[read]], [[edit]], [[create]]",
+        "Execute shell commands with safety gates. Read, write, patch, append files. Hard-blocked destructive patterns.",
+      command: "shell.exec · fs.read · fs.write · fs.patch",
     },
     {
       icon: "●",
-      title: "Task Scheduling",
+      title: "Multi-Agent System",
       description:
-        "Schedule cron jobs and automated commands with the [[schedule]] action.",
-      command: "[[schedule cron='0 9 * * *']]",
+        "Register specialist agents with custom prompts, tool allowlists, and provider pinning. Team orchestration.",
+      command: "/agents register · @agent_id",
     },
     {
       icon: "●",
-      title: "Git Integration",
+      title: "Automation",
       description:
-        "Execute git commands safely - status, diff, log, add, commit, checkout, stash.",
-      command: "[[git command='status'/]]",
+        "Cron jobs, webhooks with HMAC validation, repeating timers, and one-shot delayed jobs. Persistent job queue.",
+      command: "automation.add_cron · automation.add_webhook",
     },
     {
       icon: "●",
       title: "Skills System",
       description:
-        "Install and load custom skills/extensions from URLs to extend functionality.",
-      command: "/skill install <url>",
+        "50+ bundled skills. Install custom skills from GitHub. Rule files and environment overrides.",
+      command: "/skill list · /skill install <url>",
     },
     {
       icon: "●",
-      title: "Vision Support",
+      title: "Persistent Memory",
       description:
-        "Process images through grok-vision-beta model. Paste images in terminal.",
-      command: "/image",
+        "Markdown-based memory store. Search, upsert facts, take timestamped daily notes across sessions.",
+      command: "memory.search · memory.upsert · memory.note",
     },
     {
       icon: "●",
       title: "Voice Transcription",
       description:
-        "Transcribe voice messages from Telegram and Discord using OpenAI Whisper.",
-      command: "auto-transcription",
-    },
-    {
-      icon: "●",
-      title: "Web Search & Fetch",
-      description:
-        "Search the web and fetch URLs with [[search]] and [[fetch]] actions.",
-      command: "[[fetch url='...'/]]",
-    },
-    {
-      icon: "●",
-      title: "Heartbeat System",
-      description:
-        "Periodic AI reflection with scheduled wake-ups, HEARTBEAT.md checklists, and alert routing.",
-      command: "/heartbeat",
+        "OpenAI Whisper integration. Auto-transcribe voice messages from Telegram, Discord, Slack, and WhatsApp.",
+      command: "/transcription setup",
     },
     {
       icon: "●",
       title: "Solana Wallet",
       description:
         "Integrated wallet for SOL & $SLASHBOT tokens. Pay for API usage, send tokens, redeem credits.",
-      command: "/wallet",
+      command: "/wallet balance · /wallet send",
     },
     {
       icon: "●",
-      title: "Developer Experience",
+      title: "Web Search & Fetch",
       description:
-        "Enhanced productivity with hooks and triggers for automated workflows and integrations.",
-      command: "hooks & triggers",
+        "AI-powered web search and HTTP fetch with content extraction and summarization.",
+      command: "web.search · web.fetch",
+    },
+    {
+      icon: "●",
+      title: "Heartbeat System",
+      description:
+        "Periodic health checks with HEARTBEAT.md review, alert classification, and delivery to any connector.",
+      command: "/heartbeat enable · /heartbeat trigger",
+    },
+    {
+      icon: "●",
+      title: "Orchestrator",
+      description:
+        "Delegate tasks to subagents with auto-routing, fan-out, and pipeline strategies. Background execution.",
+      command: "orchestrate · orchestrate.list",
+    },
+    {
+      icon: "●",
+      title: "Hooks & Plugins",
+      description:
+        "Plugin-first runtime. Shell hook scripts auto-discovered from .slashbot/hooks/. Extensible event system.",
+      command: ".slashbot/hooks/{event}.{name}.sh",
     },
   ];
 
   const commands = [
-    { cmd: "/login [key]", desc: "Enter Grok API key" },
-    { cmd: "/logout", desc: "Clear API key" },
-    { cmd: "/config", desc: "Show configuration" },
-    { cmd: "/init", desc: "Create GROK.md with AI" },
-    { cmd: "/grep <pattern>", desc: "Search in code" },
-    { cmd: "/files [pattern]", desc: "List project files" },
-    { cmd: "/read <path>", desc: "Read file contents" },
-    { cmd: "/write <path>", desc: "Write to file" },
-    { cmd: "/task [list|run|...]", desc: "Manage scheduled tasks" },
-    { cmd: "/skill [list|install]", desc: "Manage skills" },
-    { cmd: "/usage [reset]", desc: "Show API usage" },
-    { cmd: "/context [on|off]", desc: "Manage context compression" },
-    { cmd: "/history [n]", desc: "Show command history" },
-    { cmd: "/clear", desc: "Clear conversation" },
-    { cmd: "/help", desc: "Show all commands" },
-    { cmd: "/heartbeat [status]", desc: "Periodic AI reflection system" },
-    { cmd: "/wallet [balance]", desc: "Solana wallet management" },
+    { cmd: "/health", desc: "Runtime health summary" },
+    { cmd: "/doctor", desc: "Plugin diagnostics" },
+    { cmd: "/help", desc: "List commands and tools" },
+    { cmd: "/setup", desc: "Provider onboarding" },
+    { cmd: "/providers [select]", desc: "Show/switch LLM provider" },
+    { cmd: "/model [select]", desc: "Show/switch active model" },
+    { cmd: "/skill [list|run|info]", desc: "Manage skills" },
+    { cmd: "/agents [list|register]", desc: "Manage agents & teams" },
+    { cmd: "/discord [status|setup]", desc: "Discord connector" },
+    { cmd: "/telegram [status|setup]", desc: "Telegram connector" },
+    { cmd: "/slack [status|setup]", desc: "Slack connector" },
+    { cmd: "/whatsapp [status|setup]", desc: "WhatsApp connector" },
+    { cmd: "/heartbeat [status|trigger]", desc: "Health check system" },
+    { cmd: "/wallet [balance|send]", desc: "Solana wallet management" },
+    { cmd: "/transcription [setup]", desc: "Whisper transcription" },
+    { cmd: "/update", desc: "Self-update from git/npm" },
   ];
 
   return (
@@ -136,8 +142,8 @@ export default function Home() {
             transition={{ duration: 0.6 }}
             className="text-center mb-12"
           >
-            {/* Skull Logo */}
-            <pre className="text-terminal-violet text-2xl md:text-3xl font-mono mb-6 glow-violet inline-block">
+            {/* Robot Logo */}
+            <pre className="text-terminal-violet text-2xl md:text-3xl font-mono mb-6 glow-violet inline-block leading-tight">
               {` ▄▄▄▄▄▄▄
 ▐░░░░░░░▌
 ▐░▀░░░▀░▌
@@ -154,7 +160,7 @@ export default function Home() {
               AI-Powered CLI Assistant - Made with Slashbot
             </p>
             <div className="flex flex-wrap justify-center items-center gap-3 text-terminal-muted text-sm mb-6">
-              <span>Grok 4.1</span>
+              <span>Grok · xAI</span>
               <span>·</span>
               <a
                 href="https://x.com/getslashbot"
@@ -268,8 +274,7 @@ export default function Home() {
               <span className="text-terminal-violet">●</span> Roadmap
             </h2>
             <p className="text-terminal-muted max-w-2xl mx-auto">
-              Future plans and milestones for Slashbot, including the upcoming
-              Solana token launch.
+              Future plans and milestones for Slashbot.
             </p>
           </motion.div>
           <div className="max-w-4xl mx-auto">
