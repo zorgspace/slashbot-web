@@ -8,9 +8,6 @@ import { FeatureCard } from "@/components/FeatureCard";
 import { Connectors } from "@/components/Connectors";
 import { motion } from "framer-motion";
 import { useVersion } from "@/hooks/useVersion";
-import ReactMarkdown from "react-markdown";
-import { Roadmap } from "@/components/Roadmap";
-import { TokenUtility } from "@/components/TokenUtility";
 
 export default function Home() {
   const [copied, setCopied] = useState(false);
@@ -261,45 +258,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Roadmap Section */}
-      <section id="roadmap" className="py-20 px-4 violet-gradient">
-        <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-3xl font-bold text-terminal-text mb-4">
-              <span className="text-terminal-violet">●</span> Roadmap
-            </h2>
-            <p className="text-terminal-muted max-w-2xl mx-auto">
-              Future plans and milestones for Slashbot.
-            </p>
-          </motion.div>
-          <div className="max-w-4xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="terminal-window"
-            >
-              <div className="terminal-header">
-                <div className="terminal-dot bg-terminal-red"></div>
-                <div className="terminal-dot bg-terminal-yellow"></div>
-                <div className="terminal-dot bg-terminal-green"></div>
-                <span className="ml-4 text-terminal-muted text-sm">
-                  ROADMAP.md
-                </span>
-              </div>
-              <div className="p-6 bg-terminal-bg text-terminal-text">
-                <Roadmap />
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
       {/* Connectors Section */}
       <section id="connectors" className="py-20 px-4">
         <div className="max-w-7xl mx-auto">
@@ -318,45 +276,6 @@ export default function Home() {
           </motion.div>
 
           <Connectors />
-        </div>
-      </section>
-
-      {/* Token Utility Section */}
-      <section id="token-utility" className="py-20 px-4 violet-gradient">
-        <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-3xl font-bold text-terminal-text mb-4">
-              <span className="text-terminal-violet">●</span> Token Utility
-            </h2>
-            <p className="text-terminal-muted max-w-2xl mx-auto">
-              Learn about the $SLASHBOT token and how it powers the ecosystem.
-            </p>
-          </motion.div>
-          <div className="max-w-4xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="terminal-window"
-            >
-              <div className="terminal-header">
-                <div className="terminal-dot bg-terminal-red"></div>
-                <div className="terminal-dot bg-terminal-yellow"></div>
-                <div className="terminal-dot bg-terminal-green"></div>
-                <span className="ml-4 text-terminal-muted text-sm">
-                  TOKEN_UTILITY.md
-                </span>
-              </div>
-              <div className="p-6 bg-terminal-bg text-terminal-text">
-                <TokenUtility />
-              </div>
-            </motion.div>
-          </div>
         </div>
       </section>
 
